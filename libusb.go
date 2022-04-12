@@ -24,7 +24,12 @@ import (
 )
 
 /*
-#cgo pkg-config: libusb-1.0
+#cgo CFLAGS: -I./libusb/libusb
+#cgo CFLAGS: -DDEFAULT_VISIBILITY=""
+#cgo linux CFLAGS: -DOS_LINUX -D_GNU_SOURCE -DPOLL_NFDS_TYPE=int
+#cgo darwin CFLAGS: -DOS_DARWIN -DPOLL_NFDS_TYPE=int
+#cgo openbsd CFLAGS: -DOS_OPENBSD -DPOLL_NFDS_TYPE=int
+#cgo windows CFLAGS: -DOS_WINDOWS -DPOLL_NFDS_TYPE=int
 #include <libusb.h>
 
 int gousb_compact_iso_data(struct libusb_transfer *xfer, unsigned char *status);
